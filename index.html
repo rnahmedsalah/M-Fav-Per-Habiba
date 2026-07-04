@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى Habiba ❤ | موقع خاص</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. شاشة التحميل الرومانسية الأولية (تظهر أول شيء) -->
+    <div id="loading-screen">
+        <div class="heart-loader">💖</div>
+        <h2>Loading love...</h2>
+    </div>
+
+    <!-- أزرار التحكم الجانبية (الموسيقى والوضع المظلم) -->
+    <div class="controls">
+        <button id="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+        <button id="music-toggle" onclick="toggleMusic()">🔊</button>
+    </div>
+
+    <!-- 2. صفحة الدخول وكلمة السر -->
+    <div class="container" id="password-screen">
+        <div class="lock-icon">🔒❤️</div>
+        <h1 class="title">موقع خاص بحبيبة</h1>
+        <p class="subtitle">HAZ CLIC PARA INICIAR</p>
+        <p class="hint">الرجاء إدخال كلمة السر لفتح الجواب ✨</p>
+        
+        <div class="password-box">
+            <!-- حقل النص لكتابة الباسورد -->
+            <input type="password" id="passInput" placeholder="اكتبي كلمة السر هنا...">
+            <button onclick="checkPassword()">دخول 🔑</button>
+        </div>
+        <p id="error-msg" style="color: #e74c3c; margin-top: 10px; font-weight: bold; display: none;">كلمة السر خاطئة! جربي تاني 😼</p>
+    </div>
+
+    <!-- 3. المحتوى الرئيسي (يفتح بعد الباسورد الصحيح وتعمل الأغنية تلقائياً) -->
+    <div class="container hidden" id="main-content">
+        <div class="main-heart">💖</div>
+        
+        <!-- عنوان مميز وراقٍ -->
+        <h1 class="special-title" id="main-title">إلى حبيبة قلبي وأجمل تفاصيلي 👑✨</h1>
+        
+        <!-- هنا يظهر النص الرومنسي تدريجياً -->
+        <p class="story-text" id="story-paragraph"></p>
+        
+        <p class="hint-question" id="hint-msg">هل تقبلين الدخول يا حبيبة قلبي؟ 👀💗</p>
+        <p class="hint">الجواب مش هيتفتح غير لما تضغطي YES ✨</p>
+        
+        <div class="buttons-wrapper">
+            <button id="yesBtn" onclick="acceptLove()">YES</button>
+            <button id="noBtn" onmouseover="flyAway()">NO</button>
+        </div>
+        
+        <p class="warning-text" id="warning">لو قربتي من NO هيهرب 😼</p>
+    </div>
+
+    <!-- 🎵 صوت الأغنية (قم بتسمية ملف الأغنية song.mp3 وضعه في المجلد) -->
+    <audio id="bg-music" loop src="song.mp3"></audio>
+
+</body>
+</html>
