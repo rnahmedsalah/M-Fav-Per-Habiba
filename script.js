@@ -1,0 +1,118 @@
+// إخفاء شاشة التحميل بعد ثانيتين كالموقع الأصلي
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        const loader = document.getElementById('loading-screen');
+        loader.style.opacity = '0';
+        setTimeout(() => { loader.style.display = 'none'; }, 500);
+    }, 2000);
+});
+
+// الرسالة الخاصة بك المدمجة بالكامل
+const fullStoryMessage = "من يوم ما دخلتي حياتي وأنا بقيت بشوف الدنيا بشكل مختلف، بقيت أحس إن كل حاجة ليها طعم ومعنى بس علشان إنتِ موجودة. وجودك جنبي بيديني راحة وأمان بطريقة عمري ما حسّيتها قبل كده، وكلامك حتى لو بسيط بيقدر يغير يوم كامل عندي. يمكن مبعرفش أوصف قد إيه أنتي غالية عندي، بس كل اللي أعرفه إنك بقيتي أجمل تفصيلة في حياتي، والشخص الوحيد اللي مهما حصل بفضل أرجعله وأنا مطمن وفرحان 🌹";
+
+// فحص الباسورد (الباسورد الصحيح والوحيد هو Habiba)
+function checkPassword() {
+    const userInput = document.getElementById('passInput').value;
+    const errorMsg = document.getElementById('error-msg');
+    
+    if (userInput.toLowerCase() === 'habiba') {
+        // إخفاء صفحة الباسورد وإظهار صفحة المحتوى والرسالة
+        document.getElementById('password-screen').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+        
+        // 🎵 تشغيل أغنية "عم بنغرم بعيونك" تلقائياً فور كتابة الباسورد الصحيح الضغط على دخول
+        const music = document.getElementById('bg-music');
+        music.play().catch((error) => {
+            console.log("المتصفح يحتاج تفاعل لتشغيل الأغنية، وبما أنها ضغطت على الزر فستعمل فوراً.");
+        });
+
+        // تشغيل تأثير الكتابة التدريجية للرسالة المميزة
+        startTypewriterEffect();
+    } else {
+        // إظهار رسالة خطأ إذا كتبت الباسورد غلط
+        errorMsg.style.display = 'block';
+    }
+}
+
+// دالة محاكاة الآلة الكاتبة للظهور التدريجي للرسالة
+function startTypewriterEffect() {
+    const paragraphElement = document.getElementById('story-paragraph');
+    let index = 0;
+    
+    function typeChar() {
+        if (index < fullStoryMessage.length) {
+            paragraphElement.innerHTML += fullStoryMessage.charAt(index);
+            index++;
+            setTimeout(typeChar, 40); // 40 مللي ثانية تضمن كتابة انسيابية مريحة للعين
+        }
+    }
+    typeChar();
+}
+
+// هروب زر NO بذكاء وسرعة فائقة
+function flyAway() {
+    const noBtn = document.getElementById('noBtn');
+    const maxX = window.innerWidth - noBtn.offsetWidth - 40;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 40;
+    
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+    
+    noBtn.style.left = randomX + 'px';
+    noBtn.style.top = randomY + 'px';
+    
+    document.getElementById('warning').innerText = "تؤتؤ.. مش هتعرفي تضغطي عليه يا حبيبة! 😜";
+}
+
+// عند الضغط على YES والموافقة النهائية
+function acceptLove() {
+    const container = document.getElementById('main-content');
+    container.innerHTML = `
+        <div class="main-heart">🎉💖</div>
+        <h1 class="title">تم فتح الرسالة بالكامل 💖</h1>
+        <p class="subtitle" style="font-size: 24px;">I LOVE YOU TOO HABIBA! 🥰👀💗</p>
+        <p class="hint">الموقع منور بوجودك يا أجمل تفصيلة في العمر كله ✨</p>
+    `;
+    
+    // إطلاق سيل من القلوب والورود المتساقطة
+    setInterval(dropHeart, 100);
+}
+
+// تأثير تساقط القلوب
+function dropHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('falling-heart');
+    const heartsArray = ['❤️', '💖', '💕', '✨', '🌸', '🌹'];
+    heart.innerText = heartsArray[Math.floor(Math.random() * heartsArray.length)];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = Math.random() * 2 + 2 + 's';
+    heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => { heart.remove(); }, 4000);
+}
+
+// تبديل الوضع المظلم والمضيء
+function toggleTheme() {
+    const currentTheme = document.body.getAttribute('data-theme');
+    const themeBtn = document.getElementById('theme-toggle');
+    if (currentTheme === 'dark') {
+        document.body.removeAttribute('data-theme');
+        themeBtn.innerText = "🌙 Dark";
+    } else {
+        document.body.setAttribute('data-theme', 'dark');
+        themeBtn.innerText = "☀️ Light";
+    }
+}
+
+// التحكم اليدوي بالصوت (إيقاف وتأكيد)
+function toggleMusic() {
+    const music = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('music-toggle');
+    if (music.paused) {
+        music.play();
+        musicBtn.innerText = "🔊";
+    } else {
+        music.pause();
+        musicBtn.innerText = "🔇";
+    }
+}
